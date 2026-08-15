@@ -1,0 +1,119 @@
+
+{% extends "index.html" %}
+
+{% block  content%}
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-fluid nav-bar sticky-top px-0 px-lg-4 py-2 py-lg-0">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <a href="" class="navbar-brand p-0">
+                        <h1 class="display-6 text-info"><i class="bi bi-cloud-arrow-up-fill"></i>  </i>Cloud Computing</h1>
+                        <!-- <img src="/static/img/logo.png" alt="Logo"> -->
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                        <span class="fa fa-bars"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarCollapse" style="margin-right: -120px;">
+                        <div class="navbar-nav mx-auto py-0" >
+                            {% if login == 'user' %}
+                            <a href="{% url 'home' %}" class="nav-item nav-link ">Home</a>
+                            <a href="{% url 'uploadfiles' %}" class="nav-item nav-link">Upload File</a>
+                            <a href="{% url 'viewfiles' %}" class="nav-item nav-link">View Files</a>
+                            <a href="{% url 'myfiles' %}" class="nav-item nav-link">My Files</a>
+                            <a href="{% url 'viewfilerequests' %}" class="nav-item nav-link">File Requests</a>
+                            <a href="{% url 'viewresponses' %}" class="nav-item nav-link">View Responses</a>
+                            {% elif login == 'csp' %}
+                            <a href="{% url 'home' %}" class="nav-item nav-link ">Home
+                            <a href="{% url 'viewfiles' %}" class="nav-item nav-link">View Files</a> 
+                            <a href="{% url 'viewchallanges' %}" class="nav-item nav-link">View Challanges</a>   
+                            {% elif login == 'ptpc' %}
+                            <a href="{% url 'home' %}" class="nav-item nav-link ">Home
+                            <a href="{% url 'viewauditrequest' %}" class="nav-item nav-link">Audit Requests</a> 
+                            <a href="{% url 'cloudresponses' %}" class="nav-item nav-link">Cloud Responses</a> 
+                            {% endif %}
+                            <a href="{% url 'logout' %}" class="nav-item nav-link">Logout</a>
+                        </div>
+                        {% comment %} <a href="#" class="btn btn-primary rounded-pill py-2 px-4">Get Started</a> {% endcomment %}
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+        {% block title %}
+        <!-- Carousel Start -->
+        <div class="header-carousel">
+            <div id="carouselId" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
+                {% comment %} <ol class="carousel-indicators">
+                    <li data-bs-target="#carouselId" data-bs-slide-to="0" class="active" aria-current="true" aria-label="First slide"></li>
+                    <li data-bs-target="#carouselId" data-bs-slide-to="1" aria-label="Second slide"></li>
+                </ol> {% endcomment %}
+                <div class="carousel-inner" role="listbox">
+                    <div class="carousel-item active">
+                        <img src="/static/img/i1.png" class="img-fluid w-100" alt="First slide"/>
+                        <div class="carousel-caption">
+                            <div class="container py-4">
+                                <div class="row g-5">
+                                    <div class="col-lg-6 fadeInLeft animated" data-animation="fadeInLeft" data-delay="1s" style="animation-delay: 1s;">
+                                        
+                                                   
+                                                  
+                                           
+                                            
+                                    </div>
+                                    <div class="col-lg-6 d-none d-lg-flex fadeInRight animated" data-animation="fadeInRight" data-delay="1s" style="animation-delay: 1s;">
+                                        <div class="text-start">
+                                            <h1 class="display-5 text-white">Stub Signature-Based Efficient Public Data
+                                                Auditing System Using Dynamic
+                                                Procedures in Cloud Computing</h1>
+                                            <!-- <p>Treat yourself in USA</p> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                       
+                </div>
+            </div>
+        </div>
+        <!-- Carousel End -->
+
+       
+        <!-- About Start -->
+        <div class="container-fluid overflow-hidden about py-5">
+            <div class="container py-5">
+                <div class="row g-5">
+                    <div class="col-xl-6 wow fadeInLeft" data-wow-delay="0.2s">
+                        <div class="about-item">
+                            <div class="pb-5">
+                                <h1 class="display-5 text-capitalize"> <span class="text-info">About</span></h1>
+                                <p class="mb-0">Cloud data storage has become a cornerstone of the IT industry, offering scalable, flexible, and cost-effective services that allow users to store and manage data without the need for personal storage infrastructure. However, the widespread use of cloud services introduces significant security concerns, particularly regarding data privacy and integrity, as outsourced data may be vulnerable to unauthorized access by malicious insiders or hackers. To mitigate these risks, a partial signature-based data auditing system is proposed, employing cryptographic techniques like homomorphic encryption and hash functions to ensure secure sharing and integrity verification. This system enables dynamic operations on outsourced data, performing integrity checks at regular intervals to detect tampering attempts, while also reducing the computational costs typically associated with data auditing processes. The proposed approach demonstrates promising security enhancements and operational efficiency, making it suitable for real-world cloud storage applications based on simulation outcomes involving dynamic data blocks and sub-blocks.
+                                </p>
+                            </div>
+                          
+                            <!-- <p class="text-item my-4">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae, aliquam ipsum. Sed suscipit dolorem libero sequi aut natus debitis reprehenderit facilis quaerat similique, est at in eum. Quo, obcaecati in!
+                            </p> -->
+                            <div class="row g-4">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 wow fadeInRight" data-wow-delay="0.2s">
+                        <div class="about-img">
+                            <div class="img-1">
+                                <img src="/static/img/i5.jpg" class="img-fluid rounded h-100 w-100" alt="">
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- About End -->
+
+        
+        {% endblock  %}
+        {% endblock  %}
+

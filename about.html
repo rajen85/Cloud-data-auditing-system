@@ -1,0 +1,49 @@
+{% extends "index.html" %}
+{% block title %}
+
+        <!-- Header Start -->
+        <div class="container-fluid bg-breadcrumb">
+            <div class="container text-center py-5" style="max-width: 900px;">
+                <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">About </h4>
+                <ol class="breadcrumb d-flex justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
+                    <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+                    {% comment %} <li class="breadcrumb-item"><a href="#">Pages</a></li> {% endcomment %}
+                    <li class="breadcrumb-item active text-primary">About</li>
+                </ol>    
+            </div>
+        </div>
+        <!-- Header End -->
+
+      <!-- About Start -->
+      <div class="container-fluid overflow-hidden about py-5">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-xl-6 wow fadeInLeft" data-wow-delay="0.2s">
+                    <div class="about-item">
+                        <div class="pb-5">
+                            <h1 class="display-5 text-capitalize"> <span class="text-info">About</span></h1>
+                            <p class="mb-0">Cloud data storage has become a cornerstone of the IT industry, offering scalable, flexible, and cost-effective services that allow users to store and manage data without the need for personal storage infrastructure. However, the widespread use of cloud services introduces significant security concerns, particularly regarding data privacy and integrity, as outsourced data may be vulnerable to unauthorized access by malicious insiders or hackers. To mitigate these risks, a partial signature-based data auditing system is proposed, employing cryptographic techniques like homomorphic encryption and hash functions to ensure secure sharing and integrity verification. This system enables dynamic operations on outsourced data, performing integrity checks at regular intervals to detect tampering attempts, while also reducing the computational costs typically associated with data auditing processes. The proposed approach demonstrates promising security enhancements and operational efficiency, making it suitable for real-world cloud storage applications based on simulation outcomes involving dynamic data blocks and sub-blocks.
+                            </p>
+                        </div>
+                      
+                        <!-- <p class="text-item my-4">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae, aliquam ipsum. Sed suscipit dolorem libero sequi aut natus debitis reprehenderit facilis quaerat similique, est at in eum. Quo, obcaecati in!
+                        </p> -->
+                        <div class="row g-4">
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 wow fadeInRight" data-wow-delay="0.2s">
+                    <div class="about-img">
+                        <div class="img-1">
+                            <img src="/static/img/i5.jpg" class="img-fluid rounded h-100 w-100" alt="">
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+
+        {% endblock  %}

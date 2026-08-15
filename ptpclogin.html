@@ -1,0 +1,189 @@
+{% extends "index.html" %}
+{% block title %}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attractive Registration Form</title>
+  
+  <!-- Bootstrap CSS CDN -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Custom CSS for styling -->
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url('/static/img/i2.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    .registration-container {
+      display: flex;
+      height: 100vh;
+      justify-content: center;
+      align-items: stretch; /* Ensure equal height */
+      overflow: hidden; /* Prevent overflow on animations */
+      gap: 0; /* Remove any gaps between image and form */
+    }
+
+    .image-side, .form-side {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: transform 2s ease-in-out, opacity 2s ease-in-out;
+      opacity: 0;
+    }
+
+    /* Ensuring no extra padding or gaps between the two sides */
+    .image-side, .form-side {
+      margin: 0; /* No margin between elements */
+      padding: 0; /* Remove any padding */
+
+    }
+
+    .image-side img {
+      max-height: 90%; /* Ensures the image height scales properly */
+      max-width: 100%; 
+      object-fit: cover;
+      
+      border-radius: 8px;
+      margin-left: -190px;
+    }
+
+    .form-side {
+      padding: 0;
+      border-radius: 8px;
+    }
+
+    .registration-form {
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 500px;
+      margin-left: 170px;
+
+    }
+
+    .form-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .form-group .form-field {
+      flex: 1;
+      margin-right: 15px;
+    }
+
+    .form-group .form-field:last-child {
+      margin-right: 0;
+    }
+
+    .btn-custom {
+      width: 100%;
+      background-color: #007bff;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .btn-custom:hover {
+      background-color: #0056b3;
+    }
+
+    /* Animation: Slide from top for form, from bottom for image */
+    .form-side.slide-in {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .image-side.slide-in {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* Initial hidden states */
+    .form-side {
+      transform: translateY(-100%);
+    }
+
+    .image-side {
+      transform: translateY(100%);
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="registration-container">
+    <!-- Left Side: Image -->
+    
+
+    <!-- Right Side: Form -->
+    <div class="form-side" id="form-side">
+      <form class="registration-form" action="{% url 'ptpclogin' %}" method="post">
+        {% csrf_token %}
+
+        {% if messages %}
+        {% for message in messages %}
+       <center> <p class="alert alert-success">{{message}}</p></center>
+        {% endfor %}
+        {% endif %}
+        <h2 class="form-header">PTPC Login</h2>
+        
+        
+
+        <!-- Email and Phone Row -->
+        <div class="form-group">
+          <div class="form-field">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" placeholder="Email" name="email">
+          </div>
+          
+        </div>
+
+        <!-- Password and Confirm Password Row -->
+        <div class="form-group">
+          <div class="form-field">
+            <label for="password">Password</label>
+            <input type="password" name="password" placeholder="Password" required pattern=".{8}" 
+                        title="Password must be exactly 8 digits." minlength="8" maxlength="8"  class="form-control">
+          </div>
+          
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-custom">Login</button>
+      </form>
+    </div>
+    <div class="image-side" id="image-side">
+        <img src="/static/img/c2.jpg" alt="Side Image" style="border-radius: 18px; height: 340px;">
+      </div>
+  </div>
+
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <!-- JavaScript for triggering animation on page load -->
+  <script>
+    window.addEventListener('load', () => {
+      document.getElementById('form-side').classList.add('slide-in');
+      document.getElementById('image-side').classList.add('slide-in');
+    });
+  </script>
+</body>
+
+{% endblock %}

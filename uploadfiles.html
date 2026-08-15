@@ -1,0 +1,102 @@
+{% extends "home.html" %}
+{% block title %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload</title>
+    <style>
+        body {
+            background-image: url('/static/img/i4.png'); /* Add your background image path here */
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .upload-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            text-align: left;
+            max-width: 400px;
+            width: 100%;
+            margin: 100px 500px;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .upload-field {
+            margin: 15px 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        input[type="text"], input[type="file"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 8px;
+            font-size: 16px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 15px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="upload-container">
+        {% if messages %}
+        {% for message in messages %}
+        <center><p class="alert alert-success">{{ message }}</p></center>
+        {% endfor %}
+        {% endif %}
+        <h2>Upload Your File</h2>
+        <form action="{% url 'uploadfiles' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="upload-field">
+                <label for="fileName">File Name:</label>
+                <input type="text" id="fileName" name="filename" placeholder="Enter file name" required>
+            </div>
+            <div class="upload-field">
+                <label for="fileUpload">Choose a Text File:</label>
+                <input type="file" id="fileUpload" name="file" accept=".txt" required>
+            </div>
+            <div class="upload-field">
+                <input type="submit" value="Upload">
+            </div>
+        </form>
+    </div>
+
+</body>
+
+{% endblock %}

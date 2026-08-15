@@ -1,0 +1,264 @@
+{% extends "home.html" %}
+{% block title %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Files</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('/static/img/i4.png'); /* Replace with your image */
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+        }
+
+        .containr {
+            width: 90%;
+            margin: 50px auto;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .add-officer-btn {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #16c6d3;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            color: white;
+        }
+
+        .add-officer-btn:hover {
+            color: white;
+            background-color: #16c6d3;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #16c6d3;
+            color: white;
+        }
+        td {
+   
+   color: black; /* Change text color to black */
+}
+.table-responsive {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+        .action-btn {
+            padding: 5px 10px;
+            background-color: #16c6d3;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .action-btn:hover {
+            background-color: #6ee2eb;
+        }
+
+        .pagination {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .pagination a {
+            color: #007bff;
+            padding: 8px 16px;
+            text-decoration: none;
+            border: 1px solid #ddd;
+            margin: 0 2px;
+            border-radius: 5px;
+        }
+
+        .pagination a.active {
+            background-color: #16c6d3;
+            color: white;
+            border: 1px solid #007bff;
+        }
+
+        .pagination a:hover {
+            background-color: #5de1f3;
+        }
+        
+    </style>
+</head>
+<body>
+   
+
+    <div class="containr">
+        {% if messages %}
+        {% for message in messages %}
+        <center><p class="alert alert-success">{{ message }}</p></center>
+        {% endfor %}
+        {% endif %}
+        <h1>Requested File Responses</h1>
+        <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Requester Name</th> 
+                    <th>Requested Email</th>
+                    <th>File Name</th>
+                    <th>File Path</th>
+                    <th>Encrypted Data</th>
+                    <th>Status</th>
+                    {% if login != 'csp' %}
+                 <th>Actions</th> 
+                 {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in data %}
+                <tr>
+                    <td>{{ i.id }}</td>
+                    <td>{{ i.Rname }}</td>
+                    <td>{{ i.Requesteremail }}</td>
+                    <td>{{ i.file_name }}</td>
+                    
+                    <td>{{ i.file }}</td>
+                    <td>
+                        <span id="short-text-{{ i.id }}">{{ i.encrypted_data|slice:":50" }}...</span>
+                        <span id="full-text-{{ i.id }}" style="display: none;">{{ i.encrypted_data }}</span>
+                        <a href="javascript:void(0);" id="read-more-{{ i.id }}" onclick="toggleText('{{ i.id }}')" style="color: #007bff;">Read More</a>
+                    </td>
+                    <td>{{ i.status }}</td>
+                    <!-- <td style="display: flex; gap: 10px;">
+                        <a href="#" class="action-btn" style="padding: 10px; text-decoration: none; background-color: #158ad8; color: white; border-radius: 5px;" data-toggle="modal" data-target="#confirmModal" onclick="setSupplierDetails({{ i.id }}, '{{ i.file_name }}', '{{ i.name }}')">Audit Request</a>
+                    
+                        
+                    </td> -->
+                    {% if login != 'csp' %}
+                    {% if i.uploaderemail == email %}
+                    <td>Your File</td>
+                    {% else %}
+                   
+                    <td style="display: flex; gap: 10px;">
+                    
+                        <a href="#" class="action-btn" style="padding: 10px; text-decoration: none; background-color: #158ad8; color: white; border-radius: 5px;" data-toggle="modal" data-target="#confirmModal" onclick="setSupplierDetails({{ i.id }}, '{{ i.file_name }}', '{{ i.Rname }}')">Download</a>
+                    </td>
+                    
+                    {% endif %}
+                    {% endif %}
+                  
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function toggleText(id) {
+            var shortText = document.getElementById("short-text-" + id);
+            var fullText = document.getElementById("full-text-" + id);
+            var readMoreLink = document.getElementById("read-more-" + id);
+    
+            if (shortText.style.display === "none") {
+                // If full text is displayed, switch back to short text
+                shortText.style.display = "inline";
+                fullText.style.display = "none";
+                readMoreLink.innerHTML = "Read More";
+            } else {
+                // Show full text and hide short text
+                shortText.style.display = "none";
+                fullText.style.display = "inline";
+                readMoreLink.innerHTML = "Read Less";
+            }
+        }
+    </script>
+    
+
+        <div class="pagination">
+            <a href="?page=1">First</a>
+            <a href="?page={% if data.number > 1 %}{{ data.previous_page_number }}{% else %}1{% endif %}">Previous</a>
+            {% for num in data.paginator.page_range %}
+                {% if data.number == num %}
+                    <a href="?page={{ num }}" class="active">{{ num }}</a>
+                {% else %}
+                    <a href="?page={{ num }}">{{ num }}</a>
+                {% endif %}
+            {% endfor %}
+            <a href="?page={% if data.number < data.paginator.num_pages %}{{ data.next_page_number }}{% else %}{{ data.paginator.num_pages }}{% endif %}">Next</a>
+            <a href="?page={{ data.paginator.num_pages }}">Last</a>
+        </div>
+
+        <!-- <div class='officer'>
+            <a href="#" class="add-officer-btn text-center" style="text-decoration: none;">
+                Add Suppliers
+            </a>
+        </div> -->
+
+        <!-- Modal -->
+        <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmModalLabel">Confirm Removal</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="supplierDetails">Are you sure you want to send Audit Request of File:?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+                        <!-- The 'Remove' button will be dynamically updated to link to the correct supplier removal URL -->
+                        <a id="confirmRemoveButton" href="#" class="btn btn-info">Download</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+      function setSupplierDetails(id, file, name) {
+    const supplierDetails = document.getElementById('supplierDetails');
+    supplierDetails.innerHTML = `<strong>${name}</strong> Are you sure you want to download the file : <strong> ${file}</strong>?`;
+
+    const removeButton = document.getElementById('confirmRemoveButton');
+    removeButton.href = "{% url 'downloadfile' 0 %}".replace('0', id); // Pass the id into the URL
+}
+
+    </script>
+
+    <!-- Bootstrap CSS -->
+<!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> -->
+<!-- Bootstrap JS and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends "home.html" %}
+{% block title %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter Your Key</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('/static/img/i4.png'); /* Replace with your image URL */
+            background-size: cover;
+            background-position: center;
+           
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #fff;
+        }
+        .containr {
+            background: rgba(252, 248, 248, 0.7); /* Semi-transparent background */
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            width: 400px;
+            text-align: center;
+            margin: 100px 500px;
+        }
+        h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+            font-size: 16px;
+        }
+        button {
+            background: #28a745; /* Green background */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #218838; /* Darker green on hover */
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="containr">
+        
+        {% if messages %}
+        {% for message in messages %}
+       <center> <p class="alert alert-success">{{message}}</p></center>
+        {% endfor %}
+        {% endif %}
+        <h1>Enter Your Key</h1>
+        <form action="{% url 'downloadfile' id %}" method="POST"> <!-- Change action URL accordingly -->
+            {% csrf_token %}
+            <input type="text" name="key" placeholder="Enter your key" required>
+            <button type="submit"><i class="fas fa-lock"></i> Submit</button>
+        </form>
+        <div class="footer">
+            <p>Keep your key safe and secure!</p>
+        </div>
+    </div>
+</body>
+
+{% endblock %}
