@@ -73,8 +73,6 @@ pip install -r requirements.txt
 
 Copy `.env.example` to `.env` and set your own values.
 
-Important: never commit `.env` or real passwords/API keys to GitHub.
-
 The application reads the following environment variables:
 
 - `DJANGO_SECRET_KEY`
@@ -100,21 +98,3 @@ python manage.py migrate
 ```bash
 python manage.py runserver
 ```
-
-Open the local address shown by Django in your browser.
-
-## Security Notes
-
-- Do not commit `db.sqlite3`.
-- Do not commit `.env`.
-- Do not commit uploaded, encrypted, or decrypted files.
-- Use a Gmail App Password for SMTP instead of your normal Gmail password.
-- The original project contained credentials in source code; these have been removed from the GitHub-ready version and replaced with environment variables.
-- This is an academic prototype and should receive additional security hardening before production deployment.
-
-## Academic Project
-
-This repository contains the implementation of the B.Tech project:
-
-**Stub Signature-Based Efficient Public Data Auditing System Using Dynamic Procedures in Cloud Computing**
-
